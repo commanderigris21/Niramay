@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "Done",
-    "slug": "Done",
+    "name": "NIRAMAY",
+    "slug": "NIRAMAY",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/NL.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/NL.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,12 +17,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/NL.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.commanderigris21.NIRAMAY"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/NL.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0ef32b47-0695-4feb-8c07-5fd8305d283e"
+      }
     }
   }
 }

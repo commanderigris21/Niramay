@@ -14,11 +14,13 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
   },
   backButton: {
-    padding: 10,
+    padding: 12,
+    marginRight: 5,
+    fontSize: 24,
   },
   headerTitle: {
     fontSize: 20,
-    color: '#f45',
+    color: '#e74c3c',
     marginLeft: 10,
     fontWeight: 'bold',
   },
@@ -80,8 +82,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   checkboxChecked: {
-    backgroundColor: '#f45',
-    borderColor: '#f45',
+    backgroundColor: '#e74c3c',
+    borderColor: '#e74c3c',
   },
   checkboxLabel: {
     fontSize: 16,
@@ -89,6 +91,7 @@ const styles = StyleSheet.create({
   },
   slider: {
     height: 40,
+    minimumTrackTintColor: "#e74c3c",
   },
   sliderLabels: {
     flexDirection: 'row',
@@ -104,16 +107,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderStyle: 'dashed',
-    borderColor: '#f45',
+    borderColor: '#e74c3c',
     borderRadius: 8,
     marginBottom: 20,
   },
   addQuestionText: {
-    color: '#f45',
+    color: '#e74c3c',
     fontSize: 16,
+    textAlign: 'center',
   },
   publishButton: {
-    backgroundColor: '#f45',
+    backgroundColor: '#e74c3c',
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
@@ -123,6 +127,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   bottomNav: {
     flexDirection: 'row',
@@ -140,7 +145,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   activeNavItem: {
-    color: '#f45',
+    color: '#e74c3c',
   },
 });
 

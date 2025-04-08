@@ -14,12 +14,14 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
   },
   backButton: {
-    padding: 10,
+    padding: 12,
+    marginRight: 5,
+    fontSize: 24,
   },
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#f45',
+    color: '#e74c3c',
     marginLeft: 2,
   },
   formContainer: {
@@ -36,7 +38,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   sectionTitle: {
-
     fontSize: 18,
     color: '#666',
     marginBottom: 15,
@@ -63,24 +64,25 @@ const styles = StyleSheet.create({
   },
   picker: {
     backgroundColor: 'white',
+    height: 50,
     borderWidth: 1,
     borderColor: 'black',
     borderRadius: 10,
   },
   registerButton: {
     maxWidth: 300,
-    backgroundColor: '#f45',
+    backgroundColor: '#e74c3c',
     padding: 12,
     borderRadius: 8,
     alignItems: 'center',
     marginVertical: 15,
     marginLeft: 40,
-    position: 'fixed',
-    top: 70,
   },
   registerButtonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 18,
+    textAlign: 'center',
+    opacity: 10
   },
   bottomNav: {
     flexDirection: 'row',
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   activeNavItem: {
-    color: '#f45',
+    color: '#e74c3c',
   },
 });
 

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <!-- Lotus petals -->
+  <g fill="#f08080" opacity="0.8">
+    <!-- Center petal -->
+    <path d="M250,150 Q300,250 250,350 Q200,250 250,150 Z" />
+    
+    <!-- Left petals -->
+    <path d="M180,170 Q150,250 180,330 Q230,250 180,170 Z" />
+    <path d="M120,200 Q100,250 120,300 Q170,250 120,200 Z" />
+    
+    <!-- Right petals -->
+    <path d="M320,170 Q350,250 320,330 Q270,250 320,170 Z" />
+    <path d="M380,200 Q400,250 380,300 Q330,250 380,200 Z" />
+  </g>
+  
+  <!-- Mother and child symbol -->
+  <path fill="#ffffff" d="M250,200 Q290,230 280,280 Q270,320 240,330 Q220,335 210,320 Q200,300 220,290 Q235,285 245,295 Q250,300 245,310 Q240,315 235,310" stroke="#ff4040" stroke-width="8" />
+  
+  <!-- Small circles -->
+  <circle cx="430" cy="380" r="8" fill="#f08080" />
+  <circle cx="595" cy="380" r="8" fill="#f08080" />
+  
+  <!-- NIRAMAY text -->
+  <text x="250" y="420" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#333333">NIRAMAY</text>
+</svg>

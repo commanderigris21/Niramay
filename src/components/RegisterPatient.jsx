@@ -10,8 +10,7 @@ import {
 import { Picker } from '@react-native-picker/picker';
 import styles from './RegisterPatient.styles';
 
-// Add props parameter to the component function
-const RegisterPatient = ({ onCreateSurvey }) => {
+const RegisterPatient = ({ navigation }) => {
   const [patientData, setPatientData] = useState({
     fullName: '',
     age: '',
@@ -22,17 +21,17 @@ const RegisterPatient = ({ onCreateSurvey }) => {
 
   const handleSubmit = () => {
     console.log('Patient Data:', patientData);
-    // Add navigation after form submission
-    onCreateSurvey();
+    // Navigate to PatientsList after registration
+    navigation.navigate('PatientsList');
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton}>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Text>←</Text>
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Register Patient</Text>
+        <Text style={styles.headerTitle}>NIRAMAY Patient Registration</Text>
       </View>
 
       <ScrollView style={styles.formContainer}>
@@ -110,10 +109,14 @@ const RegisterPatient = ({ onCreateSurvey }) => {
         <TouchableOpacity style={styles.registerButton} onPress={handleSubmit}>
           <Text style={styles.registerButtonText}>Register Patient</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity style={[styles.registerButton, {borderWidth: 1, borderColor: '#e74c3c', backgroundColor: '#fff', marginTop: 10}]} onPress={() => navigation.navigate('PatientCard', { patientId: '#12345' })}>
+          <Text style={[styles.registerButtonText, {color: '#e74c3c'}]}>View Patient Card</Text>
+        </TouchableOpacity>
       </ScrollView>
 
       <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Dashboard')}>
           <Text>🏠</Text>
           <Text>Home</Text>
         </TouchableOpacity>
@@ -123,18 +126,18 @@ const RegisterPatient = ({ onCreateSurvey }) => {
         </TouchableOpacity>
         <TouchableOpacity 
           style={styles.navItem}
-          onPress={onCreateSurvey}  // Changed from props.onCreateSurvey
+          onPress={() => navigation.navigate('Survey')}
         >
           <Text>📋</Text>
           <Text>Surveys</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('EmergencyReferral')}>
           <Text>⚠️</Text>
           <Text>Alerts</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity style={styles.navItem} onPress={() => {}}>
           <Text>👤</Text>
-          <Text>Profile</Text>
+          <Text>Dashboard</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
