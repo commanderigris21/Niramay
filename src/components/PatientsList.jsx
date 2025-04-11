@@ -9,18 +9,22 @@ import {
   TextInput,
   FlatList 
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { getLetterAvatar } from '../utils/avatarUtils';
 import styles from './PatientsList.styles';
+import Header from './Header';
+import Navigation from './Navigation';
 
 const PatientsList = ({ navigation, route }) => {
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState(route.params?.filter || 'all');
   const [patients, setPatients] = useState([
     // Initial sample patient data
     {
       id: '#12345',
-      name: 'Sarah Johnson',
-      riskLevel: 'High Risk',
+      name: t('patientData.patient1'),
+      riskLevel: t('patientsList.riskLevels.highrisk'),
       riskColor: '#f8d7da',
       riskTextColor: '#721c24',
       nextVisit: 'Today',
@@ -29,8 +33,8 @@ const PatientsList = ({ navigation, route }) => {
     },
     {
       id: '#12346',
-      name: 'Emily Davis',
-      riskLevel: 'Medium Risk',
+      name: t('patientData.patient2'),
+      riskLevel: t('patientsList.riskLevels.mediumrisk'),
       riskColor: '#fff3cd',
       riskTextColor: '#856404',
       nextVisit: 'Tomorrow',
@@ -39,8 +43,8 @@ const PatientsList = ({ navigation, route }) => {
     },
     {
       id: '#12347',
-      name: 'Lisa Wong',
-      riskLevel: 'Low Risk',
+      name: t('patientData.patient3'),
+      riskLevel: t('patientsList.riskLevels.lowrisk'),
       riskColor: '#d4edda',
       riskTextColor: '#155724',
       nextVisit: 'Next Week',
@@ -69,7 +73,7 @@ const PatientsList = ({ navigation, route }) => {
         const updatedPatients = [...patients];
         updatedPatients[existingPatientIndex] = {
           ...updatedPatients[existingPatientIndex],
-          surveyStatus: 'Survey Complete',
+          surveyStatus: t('patientsList.surveyStatus.complete'),
           surveyComplete: true
         };
         setPatients(updatedPatients);
@@ -78,17 +82,17 @@ const PatientsList = ({ navigation, route }) => {
         const newPatient = {
           id: patientId,
           name: patientName,
-          riskLevel: 'Medium Risk', // Default risk level
+          riskLevel: t('patientsList.riskLevels.mediumrisk'), // Default risk level
           riskColor: '#fff3cd',
           riskTextColor: '#856404',
-          nextVisit: 'Not Scheduled',
-          surveyStatus: 'Survey Complete',
+          nextVisit: t('patientsList.visitTimes.notscheduled'),
+          surveyStatus: t('patientsList.surveyStatus.complete'),
           surveyComplete: true
         };
         setPatients([...patients, newPatient]);
       }
     }
-  }, [route.params?.surveyData]);
+  }, [route.params?.surveyData, t]);
 
   // Filter patients based on search query and filter type
   const filteredPatients = patients.filter(patient => {
@@ -102,7 +106,7 @@ const PatientsList = ({ navigation, route }) => {
     // Then apply category filter
     switch(filterType) {
       case 'high_risk':
-        return patient.riskLevel === 'High Risk';
+        return patient.riskLevel === t('patientsList.riskLevels.highrisk');
       case 'surveys_due':
         return !patient.surveyComplete;
       case 'all':
@@ -133,7 +137,7 @@ const PatientsList = ({ navigation, route }) => {
         />
         <View style={styles.patientDetails}>
           <Text style={styles.patientName}>{item.name}</Text>
-          <Text style={styles.patientId}>ID: {item.id}</Text>
+          <Text style={styles.patientId}>{t('patientsList.id')}: {item.id}</Text>
         </View>
         <View style={[styles.riskBadge, { backgroundColor: item.riskColor }]}>
           <Text style={[styles.riskText, { color: item.riskTextColor }]}>{item.riskLevel}</Text>
@@ -143,12 +147,12 @@ const PatientsList = ({ navigation, route }) => {
       <View style={styles.patientStatus}>
         <View style={styles.statusItem}>
           <Text style={styles.statusIcon}>📅</Text>
-          <Text style={styles.statusText}>Next Visit: {item.nextVisit}</Text>
+          <Text style={styles.statusText}>{t('patientsList.nextVisit')}: {t(`patientsList.visitTimes.${item.nextVisit.toLowerCase().replace(' ', '')}`)}</Text>
         </View>
         <View style={styles.statusItem}>
           <Text style={styles.statusIcon}>{item.surveyComplete ? '✓' : '!'}</Text>
           <Text style={[styles.statusText, item.surveyComplete ? styles.completedText : styles.pendingText]}>
-            {item.surveyStatus}
+            {t(`patientsList.surveyStatus.${item.surveyComplete ? 'complete' : 'due'}`)}
           </Text>
         </View>
       </View>
@@ -157,28 +161,17 @@ const PatientsList = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Text>←</Text>
-        </TouchableOpacity>
-        <View style={styles.headerContent}>
-          <View style={styles.logoContainer}>
-            <Image 
-              source={require('../../assets/NL.png')} 
-              style={styles.logoIcon} 
-            />
-          </View>
-          <Text style={styles.headerTitle}>NIRAMAY Patients</Text>
-        </View>
-        <TouchableOpacity style={styles.notificationButton}>
-          <Text>🔔</Text>
-        </TouchableOpacity>
-      </View>
+      <Header 
+        title={t('patientsList.title')} 
+        navigation={navigation} 
+        showBackButton={true} 
+        onBackPress={() => navigation.navigate('Dashboard')} 
+      />
 
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
-          placeholder="Search patients..."
+          placeholder={t('patientsList.searchPlaceholder')}
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
@@ -195,40 +188,12 @@ const PatientsList = ({ navigation, route }) => {
       />
 
       <View style={styles.actionButtonsContainer}>
-        <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Register')}>
+        <TouchableOpacity style={[styles.addButton, { position: 'relative', right: 0 }]} onPress={() => navigation.navigate('Register')}>
           <Text style={styles.addButtonText}>+</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity 
-          style={[styles.addButton, styles.surveyButton]} 
-          onPress={() => navigation.navigate('Survey')}
-        >
-          <Text style={styles.addButtonText}>📋</Text>
         </TouchableOpacity>
       </View>
 
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Dashboard')}>
-          <Text>🏠</Text>
-          <Text>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.navItem, styles.activeNavItem]}>
-          <Text>👥</Text>
-          <Text>Patients</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Survey')}>
-          <Text>📋</Text>
-          <Text>Surveys</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('EmergencyReferral')}>
-          <Text>⚠️</Text>
-          <Text>Alerts</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem} onPress={() => {}}>
-          <Text>👤</Text>
-          <Text>Dashboard</Text>
-        </TouchableOpacity>
-      </View>
+      <Navigation navigation={navigation} activeScreen="PatientsList" />
     </SafeAreaView>
   );
 };

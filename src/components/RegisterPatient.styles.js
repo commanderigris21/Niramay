@@ -2,20 +2,19 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 30,
     flex: 1,
     backgroundColor: '#fff',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
-    borderBottomWidth: 1,
     borderBottomColor: '#ddd',
   },
   backButton: {
     padding: 12,
-    marginRight: 5,
+    marginRight: 10,
+    borderRadius: 8,
+    backgroundColor: '#f5f5f5',
     fontSize: 24,
   },
   headerTitle: {
@@ -83,6 +82,60 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     opacity: 10
+  },
+  photoContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  photoPlaceholder: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: '#f0f0f0',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  photoPlaceholderText: {
+    fontSize: 40,
+    color: '#aaa',
+  },
+  photoPreview: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    marginBottom: 10,
+  },
+  avatarPreview: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  avatarPreviewText: {
+    fontSize: 40,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  photoButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingHorizontal: 20,
+    marginBottom: 10,
+  },
+  photoButton: {
+    backgroundColor: '#4c9eeb',
+    padding: 10,
+    borderRadius: 8,
+    flex: 0.48,
+    alignItems: 'center',
+  },
+  photoButtonText: {
+    color: 'white',
+    fontSize: 14,
   },
   bottomNav: {
     flexDirection: 'row',

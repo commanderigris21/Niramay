@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffebee',
     width: '48%',
   },
+  
   highRiskCard: {
     backgroundColor: '#ffebee',
     width: '48%',
@@ -149,6 +150,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderWidth: 2,
     borderColor: '#e1e8ed',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  activityAvatarText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   activityContent: {
     flex: 1,

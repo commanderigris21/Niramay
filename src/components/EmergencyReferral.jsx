@@ -6,21 +6,20 @@ import {
   SafeAreaView,
   ScrollView
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import styles from './EmergencyReferral.styles';
+import Header from './Header';
+import Navigation from './Navigation';
 
 const EmergencyReferral = ({ navigation }) => {
+  const { t } = useTranslation();
   const [selectedFacility, setSelectedFacility] = useState(null);
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Text>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>NIRAMAY Emergency Referral</Text>
-      </View>
+      <Header title={t('emergency.title')} navigation={navigation} showBackButton={true} />
       
       <View style={styles.idContainer}>
-        <Text style={styles.idText}>Patient ID: #23456</Text>
+        <Text style={styles.idText}>{t('emergency.patientId')}: #23456</Text>
       </View>
 
       <ScrollView style={styles.facilitiesContainer}>
@@ -31,17 +30,17 @@ const EmergencyReferral = ({ navigation }) => {
         >
           <View style={[styles.facilityCard, selectedFacility === 'phc' ? styles.highlightedFacility : null]}>
             <View style={styles.facilityHeader}>
-              <Text style={styles.facilityTitle}>Nearest PHC</Text>
-              <Text style={styles.distanceText}>1.2 km away</Text>
+              <Text style={styles.facilityTitle}>{t('emergency.nearestPHC')}</Text>
+              <Text style={styles.distanceText}>{t('emergency.distanceAway', { distance: '1.2' })}</Text>
             </View>
-            <Text style={styles.facilityName}>City Primary Health Center</Text>
-            <Text style={styles.facilityAddress}>123 Healthcare Avenue, City Area</Text>
+            <Text style={styles.facilityName}>{t('emergency.cityPHC')}</Text>
+            <Text style={styles.facilityAddress}>{t('emergency.cityPHCAddress')}</Text>
             <View style={styles.actionButtons}>
               <TouchableOpacity style={styles.callButton}>
-                <Text style={styles.callButtonText}>📞 Call PHC</Text>
+                <Text style={styles.callButtonText}>📞 {t('emergency.callPHC')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.directionsButton}>
-                <Text style={styles.directionsButtonText}>📍 Get Directions</Text>
+                <Text style={styles.directionsButtonText}>📍 {t('emergency.getDirections')}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -54,17 +53,17 @@ const EmergencyReferral = ({ navigation }) => {
         >
           <View style={[styles.facilityCard, selectedFacility === 'district' ? styles.highlightedFacility : null]}>
             <View style={styles.facilityHeader}>
-              <Text style={styles.facilityTitle}>District Hospital</Text>
-              <Text style={styles.distanceText}>3.5 km away</Text>
+              <Text style={styles.facilityTitle}>{t('emergency.districtHospital')}</Text>
+              <Text style={styles.distanceText}>{t('emergency.distanceAway', { distance: '3.5' })}</Text>
             </View>
-            <Text style={styles.facilityName}>District General Hospital</Text>
-            <Text style={styles.facilityAddress}>456 Hospital Road, District Area</Text>
+            <Text style={styles.facilityName}>{t('emergency.districtGeneralHospital')}</Text>
+            <Text style={styles.facilityAddress}>{t('emergency.districtHospitalAddress')}</Text>
             <View style={styles.actionButtons}>
               <TouchableOpacity style={styles.secondaryButton}>
-                <Text style={styles.secondaryButtonText}>📞 Call</Text>
+                <Text style={styles.secondaryButtonText}>📞 {t('emergency.call')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.secondaryButton}>
-                <Text style={styles.secondaryButtonText}>📍 Directions</Text>
+                <Text style={styles.secondaryButtonText}>📍 {t('emergency.directions')}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -77,17 +76,17 @@ const EmergencyReferral = ({ navigation }) => {
         >
           <View style={[styles.facilityCard, selectedFacility === 'rural' ? styles.highlightedFacility : null]}>
             <View style={styles.facilityHeader}>
-              <Text style={styles.facilityTitle}>Rural Health Center</Text>
-              <Text style={styles.distanceText}>5.8 km away</Text>
+              <Text style={styles.facilityTitle}>{t('emergency.ruralHealthCenter')}</Text>
+              <Text style={styles.distanceText}>{t('emergency.distanceAway', { distance: '5.8' })}</Text>
             </View>
-            <Text style={styles.facilityName}>Village Primary Health Center</Text>
-            <Text style={styles.facilityAddress}>789 Rural Road, Village Area</Text>
+            <Text style={styles.facilityName}>{t('emergency.villagePHC')}</Text>
+            <Text style={styles.facilityAddress}>{t('emergency.villagePHCAddress')}</Text>
             <View style={styles.actionButtons}>
               <TouchableOpacity style={styles.secondaryButton}>
-                <Text style={styles.secondaryButtonText}>📞 Call</Text>
+                <Text style={styles.secondaryButtonText}>📞 {t('emergency.call')}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.secondaryButton}>
-                <Text style={styles.secondaryButtonText}>📍 Directions</Text>
+                <Text style={styles.secondaryButtonText}>📍 {t('emergency.directions')}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -98,35 +97,14 @@ const EmergencyReferral = ({ navigation }) => {
         style={styles.ambulanceButton}
         onPress={() => {
           // In a real app, this would call an ambulance service API
-          alert('Ambulance service has been notified!');
+          alert(t('emergency.ambulanceNotified'));
         }}
       >
-        <Text style={styles.ambulanceButtonText}>🚑 Book 108 Ambulance</Text>
+        <Text style={styles.ambulanceButtonText}>🚑 {t('emergency.bookAmbulance')}</Text>
       </TouchableOpacity>
 
 
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Dashboard')}>
-          <Text>🏠</Text>
-          <Text>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('PatientsList')}>
-          <Text>👥</Text>
-          <Text>Patients</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Survey')}>
-          <Text>📋</Text>
-          <Text>Surveys</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.navItem, styles.activeNavItem]}>
-          <Text>⚠️</Text>
-          <Text>Alerts</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Dashboard')}>
-          <Text>👤</Text>
-          <Text>Dashboard</Text>
-        </TouchableOpacity>
-      </View>
+      <Navigation navigation={navigation} activeScreen="EmergencyReferral" />
     </SafeAreaView>
   );
 };

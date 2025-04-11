@@ -29,23 +29,22 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 20,
     width: '100%',
   },
   logoIcon: {
-    width: 500,
-    height: 500,
+    width: 200,
+    height: 200,
     position: 'relative',
-    marginTop: -80,
+    marginTop: -40,
   },
-
   inputContainer: {
     width: '100%',
     maxWidth: 350,
     backgroundColor: COLORS.white,
     borderRadius: 15,
     padding: 20,
-    marginBottom: 120,
+    marginBottom: 20,
     ...Platform.select({
       ios: {
         shadowColor: '#000',
@@ -68,15 +67,15 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
   },
-  phoneInputWrapper: {
+  inputWrapper: {
     alignItems: 'center',
     borderWidth: 1,
     borderColor: COLORS.border,
     borderRadius: 8,
-    marginBottom: 20,
+    marginBottom: 15,
     overflow: 'hidden',
   },
-  phoneInput: {
+  input: {
     width: '100%',
     paddingHorizontal: 12,
     paddingVertical: 15,
@@ -113,84 +112,11 @@ const styles = StyleSheet.create({
     color: COLORS.textLight,
     textAlign: 'center',
   },
-  otpContainer: {
-    width: '100%',
-    maxWidth: 350,
-    backgroundColor: COLORS.white,
-    borderRadius: 15,
-    padding: 20,
-    ...Platform.select({
-      ios: {
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 10,
-      },
-      android: {
-        elevation: 5,
-      },
-      web: {
-        boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
-      },
-    }),
-  },
-  otpTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: COLORS.text,
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  otpDescription: {
-    fontSize: 14,
-    color: COLORS.textLight,
-    textAlign: 'center',
-    marginBottom: 25,
-  },
-  otpInputsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 25,
-  },
-  otpInput: {
-    width: 60,
-    height: 60,
-    borderWidth: 1,
-    borderColor: COLORS.border,
-    borderRadius: 8,
-    textAlign: 'center',
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: COLORS.text,
-  },
   loadingDot: {
     width: 10,
     height: 10,
     borderRadius: 5,
     backgroundColor: COLORS.white,
-  },
-  resendContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-  resendText: {
-    fontSize: 14,
-    color: COLORS.textLight,
-  },
-  resendButton: {
-    fontSize: 14,
-    color: COLORS.secondary,
-    fontWeight: '600',
-  },
-  changeNumberButton: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  changeNumberText: {
-    fontSize: 14,
-    color: COLORS.secondary,
-    fontWeight: '500',
   },
 });
 

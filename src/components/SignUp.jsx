@@ -11,16 +11,17 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  TextInput
+  TextInput,
+  Alert
 } from 'react-native';
-import { useTranslation } from 'react-i18next';
-import styles from './Login.styles';
+import styles from './SignUp.styles';
 
-const Login = ({ navigation }) => {
-  const { t } = useTranslation();
-  const [userId, setUserId] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
+const SignUp = ({ navigation }) => {
+  const [name, setName] = useState('');
+  const [ashaId, setAshaId] = useState('');
+  const [pincode, setPincode] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [isRegistering, setIsRegistering] = useState(false);
   
   // Animation values
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -50,12 +51,44 @@ const Login = ({ navigation }) => {
         useNativeDriver: true,
       })
     ]).start();
+
+    // Start loading animation
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(loadingAnim, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: true,
+        }),
+        Animated.timing(loadingAnim, {
+          toValue: 0,
+          duration: 500,
+          useNativeDriver: true,
+        })
+      ])
+    ).start();
   }, []);
 
-  const handleLogin = () => {
-    if (!userId || !password) return;
+  const handleRegister = () => {
+    // Validate inputs
+    if (!name || !ashaId || !pincode || !mobile) {
+      Alert.alert('Error', 'Please fill all fields');
+      return;
+    }
+
+    // Validate pincode (6 digits)
+    if (pincode.length !== 6 || !/^\d+$/.test(pincode)) {
+      Alert.alert('Error', 'Pincode must be 6 digits');
+      return;
+    }
+
+    // Validate mobile number (10 digits)
+    if (mobile.length !== 10 || !/^\d+$/.test(mobile)) {
+      Alert.alert('Error', 'Mobile number must be 10 digits');
+      return;
+    }
     
-    
+    // Button press animation
     Animated.sequence([
       Animated.timing(buttonScaleAnim, {
         toValue: 0.95,
@@ -70,33 +103,18 @@ const Login = ({ navigation }) => {
     ]).start();
     
     Keyboard.dismiss();
-    setIsLoggingIn(true);
+    setIsRegistering(true);
     
-    // Simulate login process
+    // Simulate registration process
     setTimeout(() => {
-      setIsLoggingIn(false);
-      navigation.navigate('Dashboard');
+      setIsRegistering(false);
+      Alert.alert(
+        'Registration Successful', 
+        'Your account has been created successfully!',
+        [{ text: 'OK', onPress: () => navigation.navigate('Dashboard') }]
+      );
     }, 1500);
   }
-
-  const handleSignUp = () => {
-    // Animation for signup button
-    Animated.sequence([
-      Animated.timing(buttonScaleAnim, {
-        toValue: 0.95,
-        duration: 100,
-        useNativeDriver: true,
-      }),
-      Animated.timing(buttonScaleAnim, {
-        toValue: 1,
-        duration: 100,
-        useNativeDriver: true,
-      })
-    ]).start();
-    
-    // Navigate to SignUp page
-    navigation.navigate('SignUp');
-  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -132,34 +150,61 @@ const Login = ({ navigation }) => {
               }
             ]}
           >
-            <Text style={styles.inputLabel}>{t('login.loginToAccount')}</Text>
-            <View style={styles.phoneInputWrapper}>
+            <Text style={styles.inputLabel}>Create your account</Text>
+            
+            {/* Name Input */}
+            <View style={styles.inputWrapper}>
               <TextInput
-                style={styles.phoneInput}
-                placeholder={t('login.username')}
+                style={styles.input}
+                placeholder="Full Name"
                 keyboardType="default"
-                value={userId}
-                onChangeText={setUserId}
+                value={name}
+                onChangeText={setName}
               />
             </View>
             
-            <View style={styles.phoneInputWrapper}>
+            {/* ASHA ID Input */}
+            <View style={styles.inputWrapper}>
               <TextInput
-                style={styles.phoneInput}
-                placeholder={t('login.password')}
-                secureTextEntry={true}
-                value={password}
-                onChangeText={setPassword}
+                style={styles.input}
+                placeholder="ASHA ID"
+                keyboardType="default"
+                value={ashaId}
+                onChangeText={setAshaId}
+              />
+            </View>
+            
+            {/* Pincode Input */}
+            <View style={styles.inputWrapper}>
+              <TextInput
+                style={styles.input}
+                placeholder="Region Pincode (6 digits)"
+                keyboardType="numeric"
+                maxLength={6}
+                value={pincode}
+                onChangeText={setPincode}
+              />
+            </View>
+            
+            {/* Mobile Input */}
+            <View style={styles.inputWrapper}>
+              <TextInput
+                style={styles.input}
+                placeholder="Mobile Number"
+                keyboardType="phone-pad"
+                maxLength={10}
+                value={mobile}
+                onChangeText={setMobile}
               />
             </View>
             
             <Animated.View style={{ transform: [{ scale: buttonScaleAnim }], width: '100%', marginTop: 20 }}>
               <TouchableOpacity 
-                style={[styles.button, (!userId || !password) && styles.buttonDisabled]}
-                onPress={handleLogin}
-                disabled={!userId || !password || isLoggingIn}
+                style={[styles.button, (!name || !ashaId || !pincode || !mobile) && styles.buttonDisabled]}
+                onPress={handleRegister}
+                disabled={!name || !ashaId || !pincode || !mobile || isRegistering}
               >
-                {isLoggingIn ? (
+                {isRegistering ? (
                   <Animated.View 
                     style={[
                       styles.loadingDot,
@@ -176,20 +221,20 @@ const Login = ({ navigation }) => {
                     ]}
                   />
                 ) : (
-                  <Text style={styles.buttonText}>{t('common.login')}</Text>
+                  <Text style={styles.buttonText}>Register</Text>
                 )}
               </TouchableOpacity>
             </Animated.View>
             
             <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 20 }}>
-              <Text style={styles.termsText}>{t('login.noAccount')} </Text>
-              <TouchableOpacity onPress={handleSignUp}>
-                <Text style={[styles.termsText, { color: '#3498db', fontWeight: '600' }]}>{t('common.signUp')}</Text>
+              <Text style={styles.termsText}>Already have an account? </Text>
+              <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                <Text style={[styles.termsText, { color: '#3498db', fontWeight: '600' }]}>Login</Text>
               </TouchableOpacity>
             </View>
             
             <Text style={[styles.termsText, { marginTop: 20 }]}>
-              {t('login.termsAgreement')}
+              By continuing, you agree to our Terms of Service and Privacy Policy
             </Text>
           </Animated.View>
 
@@ -199,4 +244,4 @@ const Login = ({ navigation }) => {
   );
 };
 
-export default Login;
+export default SignUp;

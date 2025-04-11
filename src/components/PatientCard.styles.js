@@ -15,7 +15,9 @@ const styles = StyleSheet.create({
   },
   backButton: {
     padding: 12,
-    marginRight: 5,
+    marginRight: 10,
+    borderRadius: 8,
+    backgroundColor: '#f5f5f5',
     fontSize: 24,
   },
   patientHeader: {
@@ -59,6 +61,21 @@ const styles = StyleSheet.create({
     height: 70,
     borderRadius: 35,
     marginRight: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e74c3c',
+    borderWidth: 2,
+    borderColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  profileAvatarText: {
+    color: '#ffffff',
+    fontSize: 24,
+    fontWeight: 'bold',
   },
   profileInfo: {
     flex: 1,
@@ -151,6 +168,53 @@ const styles = StyleSheet.create({
     color: '#e74c3c',
     fontSize: 16,
   },
+
+   dietButton: {
+      borderWidth: 1,
+      borderColor: '#e74c3c',
+      marginHorizontal: 20,
+      padding: 15,
+      borderRadius: 8,
+      alignItems: 'center',
+      marginTop: 10,
+    },
+
+    dietButtonText: {
+        color: '#e74c3c',
+        fontSize: 16,
+      },
+
+    survey1Button: {
+          borderWidth: 1,
+          borderColor: '#e74c3c',
+          marginHorizontal: 20,
+          padding: 15,
+          borderRadius: 8,
+          alignItems: 'center',
+          marginTop: 10,
+        },
+    survey1ButtonText: {
+        color: '#e74c3c',
+        fontSize: 16,
+      },
+
+      survey2Button: {
+            borderWidth: 1,
+            borderColor: '#e74c3c',
+            marginHorizontal: 20,
+            padding: 15,
+            borderRadius: 8,
+            alignItems: 'center',
+            marginTop: 10,
+          },
+
+      survey2ButtonText: {
+          color: '#e74c3c',
+          fontSize: 16,
+        },
+
+
+
   bottomNav: {
     flexDirection: 'row',
     justifyContent: 'space-around',
