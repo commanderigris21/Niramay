@@ -34,3 +34,7 @@ Features
 
 
 [![Watch the demo](https://img.youtube.com/vi/4bddoCV_UKQ/0.jpg)](https://www.youtube.com/watch?v=4bddoCV_UKQ)
+git clone https://github.com/yourusername/introvise.git
+cd introvise
+npm install
+npm run dev
