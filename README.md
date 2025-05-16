@@ -35,7 +35,10 @@ Features
 
 [![Watch the demo](https://img.youtube.com/vi/4bddoCV_UKQ/0.jpg)](https://www.youtube.com/watch?v=4bddoCV_UKQ)
 
-git clone <br/> https://github.com/yourusername/introvise.git<br/>
-cd introvise<br/>
-npm install<br/>
-npm run dev<br/>
+## 📦 Installation
+
+```bash
+git clone https://github.com/yourusername/introvise.git
+cd niramay
+npm install
+npm run dev
