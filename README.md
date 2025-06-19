@@ -38,7 +38,7 @@ Features
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/commanderigris 21/introvise.git
+git clone https://github.com/commanderigris 21/Niramay.git
 cd niramay
 npm install
 npm run dev
